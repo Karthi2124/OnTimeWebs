@@ -13,20 +13,18 @@ class BusinessEnquiryController extends Controller
     {
         // 1️⃣ Validate Required Fields
         $validated = $request->validate([
-            'website_plan' => 'required|string',
+            'website_plan'      => 'required|string',
             'business_category' => 'required|string',
-            'brand_name' => 'required|string',
-            'contact_number' => 'required|string',
-            'email' => 'nullable|email',
-            'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'photos.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'brand_name'        => 'required|string',
+            'contact_number'    => 'required|string',
+            'email'             => 'nullable|email',
+            'logo'              => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'photos.*'          => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
-        $data = $request->all();
 
         // 2️⃣ Upload Logo
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
         // 3️⃣ Upload Multiple Photos
@@ -37,42 +35,40 @@ class BusinessEnquiryController extends Controller
                 $photos[] = $photo->store('photos', 'public');
             }
 
-            $data['photos'] = $photos;
+            $validated['photos'] = $photos; // ✅ NO json_encode
         }
 
-        // 4️⃣ Save pages as array
-        $data['pages'] = $request->pages ?? [];
+        // 4️⃣ Store Pages as Array (NO json_encode)
+        $validated['pages'] = $request->pages ?? [];
 
-        // 5️⃣ Create Record
-        $enquiry = BusinessEnquiry::create([
-            'website_plan' => $data['website_plan'],
-            'business_category' => $data['business_category'],
-            'brand_name' => $data['brand_name'],
-            'contact_number' => $data['contact_number'],
-            'email' => $data['email'] ?? null,
-            'facebook_link' => $data['facebook_link'] ?? null,
-            'instagram_link' => $data['instagram_link'] ?? null,
-            'gmb_link' => $data['gmb_link'] ?? null,
-            'address' => $data['address'] ?? null,
-            'logo' => $data['logo'] ?? null,
-            'photos' => $data['photos'] ?? null,
-            'pages' => $data['pages'],
-            'about_business' => $data['about_business'] ?? null,
-            'about_products' => $data['about_products'] ?? null,
-            'highlights' => $data['highlights'] ?? null,
-            'why_choose_us' => $data['why_choose_us'] ?? null,
-            'testimonials' => $data['testimonials'] ?? null,
-            'mission' => $data['mission'] ?? null,
-            'vision' => $data['vision'] ?? null,
-            'our_strengths' => $data['our_strengths'] ?? null,
-        ]);
+        // 5️⃣ Add Optional Fields Safely
+        $validated['facebook_link']  = $request->facebook_link ?? null;
+        $validated['instagram_link'] = $request->instagram_link ?? null;
+        $validated['gmb_link']       = $request->gmb_link ?? null;
+        $validated['address']        = $request->address ?? null;
+        $validated['about_business'] = $request->about_business ?? null;
+        $validated['about_products'] = $request->about_products ?? null;
+        $validated['highlights']     = $request->highlights ?? null;
+        $validated['why_choose_us']  = $request->why_choose_us ?? null;
+        $validated['testimonials']   = $request->testimonials ?? null;
+        $validated['mission']        = $request->mission ?? null;
+        $validated['vision']         = $request->vision ?? null;
+        $validated['our_strengths']  = $request->our_strengths ?? null;
 
-        // 6️⃣ Send Mail to Admin Automatically
-        Mail::to(env('ADMIN_EMAIL'))->send(new BusinessEnquiryMail($enquiry));
+        // 6️⃣ Save to Database
+        $enquiry = BusinessEnquiry::create($validated);
 
-        // 7️⃣ Redirect with Success Message
+        // 7️⃣ Send Mail (Safe Try-Catch)
+        try {
+            Mail::to(env('ADMIN_EMAIL'))
+                ->send(new BusinessEnquiryMail($enquiry));
+        } catch (\Exception $e) {
+            \Log::error('Mail Error: ' . $e->getMessage());
+        }
+
+        // 8️⃣ Redirect Back
         return redirect()
-                ->route('home')
-                ->with('success', 'Enquiry submitted successfully!');
+            ->route('home')
+            ->with('success', 'Enquiry submitted successfully!');
     }
 }

@@ -30,7 +30,7 @@ class BusinessEnquiry extends Model
     ];
 
     protected $casts = [
-        'photos' => 'array',
         'pages' => 'array',
+        'photos' => 'array',
     ];
 }

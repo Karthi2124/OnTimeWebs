@@ -17,29 +17,29 @@ class BusinessEnquiryMail extends Mailable
 
     public function build()
     {
-        $mail = $this->subject('New Business Enquiry')
-                     ->view('emails.business_enquiry');
+        return $this->subject('New Business Enquiry')
+            ->view('emails.business_enquiry')
+            ->withSymfonyMessage(function ($message) {
 
-        // ✅ Embed Logo
-        if ($this->enquiry->logo) {
-            $logoPath = storage_path('app/public/' . $this->enquiry->logo);
+                // Embed Logo
+                if ($this->enquiry->logo) {
+                    $logoPath = storage_path('app/public/' . $this->enquiry->logo);
 
-            if (file_exists($logoPath)) {
-                $this->logoCid = $mail->embed($logoPath);
-            }
-        }
-
-        // ✅ Embed Multiple Photos
-        if ($this->enquiry->photos) {
-            foreach ($this->enquiry->photos as $photo) {
-                $photoPath = storage_path('app/public/' . $photo);
-
-                if (file_exists($photoPath)) {
-                    $this->photoCids[] = $mail->embed($photoPath);
+                    if (file_exists($logoPath)) {
+                        $this->logoCid = $message->embedFromPath($logoPath);
+                    }
                 }
-            }
-        }
 
-        return $mail;
+                // Embed Photos
+                if ($this->enquiry->photos) {
+                    foreach ($this->enquiry->photos as $photo) {
+                        $photoPath = storage_path('app/public/' . $photo);
+
+                        if (file_exists($photoPath)) {
+                            $this->photoCids[] = $message->embedFromPath($photoPath);
+                        }
+                    }
+                }
+            });
     }
 }
