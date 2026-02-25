@@ -4,43 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BusinessEnquiry;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BusinessEnquiryMail;
 
 class BusinessEnquiryController extends Controller
 {
     public function store(Request $request)
     {
-        // Validate Required Fields
-        $request->validate([
+        // 1️⃣ Validate Required Fields
+        $validated = $request->validate([
             'website_plan' => 'required|string',
             'business_category' => 'required|string',
             'brand_name' => 'required|string',
             'contact_number' => 'required|string',
             'email' => 'nullable|email',
-            'logo' => 'nullable|image',
-            'photos.*' => 'nullable|image',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'photos.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $data = $request->all();
 
-        // Upload Logo
+        // 2️⃣ Upload Logo
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
-        // Upload Multiple Photos
+        // 3️⃣ Upload Multiple Photos
         if ($request->hasFile('photos')) {
             $photos = [];
+
             foreach ($request->file('photos') as $photo) {
                 $photos[] = $photo->store('photos', 'public');
             }
+
             $data['photos'] = $photos;
         }
 
-        // Save pages as array
+        // 4️⃣ Save pages as array
         $data['pages'] = $request->pages ?? [];
 
-        // Create Record
-        BusinessEnquiry::create([
+        // 5️⃣ Create Record
+        $enquiry = BusinessEnquiry::create([
             'website_plan' => $data['website_plan'],
             'business_category' => $data['business_category'],
             'brand_name' => $data['brand_name'],
@@ -63,7 +67,12 @@ class BusinessEnquiryController extends Controller
             'our_strengths' => $data['our_strengths'] ?? null,
         ]);
 
-        return redirect()->route('home')
-                         ->with('success', 'Enquiry submitted successfully!');
+        // 6️⃣ Send Mail to Admin Automatically
+        Mail::to(env('ADMIN_EMAIL'))->send(new BusinessEnquiryMail($enquiry));
+
+        // 7️⃣ Redirect with Success Message
+        return redirect()
+                ->route('home')
+                ->with('success', 'Enquiry submitted successfully!');
     }
 }

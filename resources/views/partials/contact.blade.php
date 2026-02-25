@@ -8,96 +8,78 @@
             <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Let's Discuss Your Project</h2>
             <p class="text-xl text-gray-600">Have a question or ready to start? We're here to help you build your dream website.</p>
         </div>
-        
+
         <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            
+
             <!-- Contact Info Cards -->
             <div class="lg:col-span-1 space-y-6">
-                
-                <!-- Phone Card -->
-                <div class="bg-gray-50 p-6 rounded-2xl hover-card">
-                    <div class="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center mb-4">
-                        <i class="fas fa-phone-alt text-white"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Call Us</h3>
-                    <p class="text-gray-600 mb-3">Mon-Fri 9:00 AM - 6:00 PM</p>
+                <div class="bg-gray-50 p-6 rounded-2xl">
+                    <h3 class="font-bold text-gray-900 mb-2">Call Us</h3>
                     <p class="text-indigo-600 font-semibold">+91 6369916608</p>
                 </div>
-                
-                <!-- Email Card -->
-                <div class="bg-gray-50 p-6 rounded-2xl hover-card">
-                    <div class="w-12 h-12 gradient-secondary rounded-xl flex items-center justify-center mb-4">
-                        <i class="fas fa-envelope text-white"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Email Us</h3>
-                    <p class="text-gray-600 mb-3">24/7 Support</p>
-                    <p class="text-indigo-600 font-semibold">Ontimewebs@gmail.com</p>
-                </div>
-                
-                <!-- Address Card -->
-                <div class="bg-gray-50 p-6 rounded-2xl hover-card">
-                    <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4">
-                        <i class="fas fa-map-marker-alt text-white"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Visit Us</h3>
-                    <p class="text-gray-600">123 Business Park, Andheri East,</p>
-                    <p class="text-gray-600">Mumbai - 400093, Maharashtra</p>
+
+                <div class="bg-gray-50 p-6 rounded-2xl">
+                    <h3 class="font-bold text-gray-900 mb-2">Email Us</h3>
+                    <p class="text-indigo-600 font-semibold">ontimewebs@gmail.com</p>
                 </div>
             </div>
-            
+
             <!-- Contact Form -->
             <div class="lg:col-span-2 bg-gray-50 p-8 rounded-3xl">
-                <form id="contactForm" class="space-y-6">
+
+                {{-- Success Message --}}
+                @if(session('success'))
+                    <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-xl">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('contact.send') }}" class="space-y-6">
                     @csrf
-                    
+
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                            <input type="text" name="name" required 
-                                   class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                            <input type="text" name="name" required
+                                   class="w-full px-4 py-3 bg-white border rounded-xl">
                         </div>
-                        
+
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                            <input type="email" name="email" required 
-                                   class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                            <input type="email" name="email" required
+                                   class="w-full px-4 py-3 bg-white border rounded-xl">
                         </div>
                     </div>
-                    
+
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                        <input type="tel" name="phone" required 
-                               class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                        <input type="text" name="phone" required
+                               class="w-full px-4 py-3 bg-white border rounded-xl">
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Select Plan</label>
-                        <select name="plan" class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
-                            <option value="">Choose a plan</option>
-                            <option value="basic">Basic Plan (₹5,999)</option>
-                            <option value="professional">Professional Plan (₹9,999)</option>
-                            <option value="business">Business Plan (₹14,999)</option>
+                        <select name="plan"
+                                class="w-full px-4 py-3 bg-white border rounded-xl">
+                            <option value="">Choose Plan</option>
+                            <option value="Basic">Basic Plan</option>
+                            <option value="Professional">Professional Plan</option>
+                            <option value="Business">Business Plan</option>
                         </select>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
-                        <textarea name="message" rows="4" required 
-                                  class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-600 focus:border-transparent"></textarea>
+                        <textarea name="message" rows="4" required
+                                  class="w-full px-4 py-3 bg-white border rounded-xl"></textarea>
                     </div>
-                    
-                    <button type="submit" 
-                            class="w-full gradient-primary text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition">
+
+                    <button type="submit"
+                            class="w-full bg-indigo-600 text-white px-8 py-4 rounded-xl font-semibold">
                         Send Message
-                        <i class="fas fa-paper-plane ml-2"></i>
                     </button>
                 </form>
-                
-                <!-- Success Message -->
-                <div id="formSuccess" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-xl">
-                    <i class="fas fa-check-circle mr-2"></i>
-                    Thank you! We'll get back to you shortly.
-                </div>
+
             </div>
         </div>
     </div>
