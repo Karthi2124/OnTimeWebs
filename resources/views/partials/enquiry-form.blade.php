@@ -84,8 +84,11 @@
                 </div>
             </div>
 
-            <form id="businessForm" enctype="multipart/form-data">
-                @csrf
+<form id="businessForm"
+      action="{{ route('business.enquiry.store') }}"
+      method="POST"
+      enctype="multipart/form-data">
+    @csrf
                 <input type="hidden" name="website_plan" id="websitePlanInput">
 
                 <!-- Step 1: Business Information -->
@@ -399,6 +402,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.getElementById('modalNextBtn');
     const prevBtn = document.getElementById('modalPrevBtn');
     const submitBtn = document.getElementById('modalSubmitBtn');
+
+    submitBtn.addEventListener('click', function () {
+    document.getElementById('businessForm').submit();
+});
     let currentStep = 0;
 
     // Open Modal
@@ -484,38 +491,8 @@ document.addEventListener('DOMContentLoaded', function() {
             showStep(currentStep - 1);
         }
     });
-
-    // Form Submit Handler
-    document.getElementById('businessForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Validate required fields
-        const requiredFields = this.querySelectorAll('[required]');
-        let isValid = true;
-        
-        requiredFields.forEach(field => {
-            if (!field.value) {
-                field.classList.add('border-red-500');
-                isValid = false;
-            } else {
-                field.classList.remove('border-red-500');
-            }
-        });
-        
-        if (!isValid) {
-            alert('Please fill in all required fields');
-            return;
-        }
-        
-        // Show success message
-        alert('Thank you! Your enquiry has been submitted successfully. We will contact you shortly.');
-        
-        // Close modal and reset
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.body.style.overflow = 'auto';
-        this.reset();
-        showStep(0);
-    });
+    submitBtn.addEventListener('click', function () {
+    document.getElementById('businessForm').submit();
+});
 });
 </script>

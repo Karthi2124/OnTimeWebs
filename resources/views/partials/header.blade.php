@@ -41,7 +41,7 @@
     </div>
     
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+    <div id="mobile-menu" class="hidden bg-white border-t border-gray-200 md:hidden">
         <div class="container mx-auto px-4 py-4">
             <nav class="flex flex-col space-y-3">
                 <a href="#home" class="py-2 text-gray-700 hover:text-indigo-600 font-medium transition">Home</a>
