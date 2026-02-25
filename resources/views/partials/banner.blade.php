@@ -54,15 +54,19 @@
                 <div class="flex flex-wrap gap-6 mt-12 justify-center lg:justify-start">
                     <div class="flex items-center">
                         <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                        <span class="text-gray-600">Domain</span>
+                        <span class="text-gray-600">Domain Hosting</span>
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                        <span class="text-gray-600">SSL Included</span>
+                        <span class="text-gray-600">Fast & Secure Hosting </span>
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                        <span class="text-gray-600">7 Days Delivery</span>
+                        <span class="text-gray-600">Free SSL Certificate </span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span class="text-gray-600">WhatsApp, Email, Phone & Social Media Integration </span>
                     </div>
                 </div>
             </div>

@@ -37,11 +37,7 @@
                         <div class="text-sm text-gray-600">Projects Completed</div>
                     </div>
                     <div>
-                        <div class="text-3xl font-bold text-indigo-600">7</div>
-                        <div class="text-sm text-gray-600">Days Avg Delivery</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-indigo-600">100%</div>
+                        <div class="text-3xl font-bold text-indigo-600">98%</div>
                         <div class="text-sm text-gray-600">Client Satisfaction</div>
                     </div>
                 </div>

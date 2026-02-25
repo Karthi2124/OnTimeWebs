@@ -2,15 +2,14 @@
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
-            
-            <!-- Logo -->
+
 <!-- Logo -->
 <a href="{{ url('/') }}" class="flex items-center">
     
-    <img src="{{ asset('images/logo-4.png') }}" 
+    <img src="{{ asset('images/logo-5.png') }}" 
          alt="OnTimeWebs Logo"
-         class="h-18 md:h-20 w-auto object-contain">
-                <span class="font-bold text-xl text-gray-800">OnTime<span class="text-indigo-600">Webs</span></span>
+         class="h-24 md:h-26 w-auto object-contain">
+                <!-- <span class="font-bold text-xl text-gray-800 -ml-4">OnTime<span class="text-indigo-600">Webs</span></span> -->
             </a>
             
             <!-- Desktop Navigation -->
