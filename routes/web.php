@@ -16,3 +16,9 @@ Route::post('/business-enquiry', [BusinessEnquiryController::class, 'store'])
 Route::post('/contact-send', 
     [ContactController::class, 'send']
 )->name('contact.send');
+
+
+// 🔥 TEMPORARY HASH ROUTE (ADD THIS)
+Route::get('/hash', function () {
+    return bcrypt('123456');
+});
