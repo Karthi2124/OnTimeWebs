@@ -11,18 +11,43 @@
 
         <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
 
-            <!-- Contact Info Cards -->
-            <div class="lg:col-span-1 space-y-6">
-                <div class="bg-gray-50 p-6 rounded-2xl">
-                    <h3 class="font-bold text-gray-900 mb-2">Call Us</h3>
-                    <p class="text-indigo-600 font-semibold">+91 6369916608</p>
-                </div>
+<!-- Contact Info Cards -->
+<div class="lg:col-span-1 space-y-6">
 
-                <div class="bg-gray-50 p-6 rounded-2xl">
-                    <h3 class="font-bold text-gray-900 mb-2">Email Us</h3>
-                    <p class="text-indigo-600 font-semibold">ontimewebs@gmail.com</p>
-                </div>
-            </div>
+    <div class="bg-gray-50 p-6 rounded-2xl">
+        <h3 class="font-bold text-gray-900 mb-2">Call Us</h3>
+        <p class="text-indigo-600 font-semibold">+91 6369916608</p>
+    </div>
+
+    <div class="bg-gray-50 p-6 rounded-2xl">
+        <h3 class="font-bold text-gray-900 mb-2">Email Us</h3>
+        <p class="text-indigo-600 font-semibold">ontimewebs@gmail.com</p>
+    </div>
+
+    <!-- ✅ Address -->
+    <div class="bg-gray-50 p-6 rounded-2xl">
+        <h3 class="font-bold text-gray-900 mb-2">Our Office</h3>
+        <p class="text-gray-700 text-sm leading-relaxed">
+            No 16/35, 1st Floor,<br>
+            Sengalpatty 3rd Street,<br>
+            Gugai, Salem - 636006,<br>
+            Tamil Nadu, India
+        </p>
+    </div>
+
+    <!-- ✅ Google Map -->
+    <div class="rounded-2xl overflow-hidden shadow-sm">
+        <iframe 
+            src="https://www.google.com/maps?q=No%2016/35,%201st%20Floor,%20Sengalpatty%203rd%20Street,%20Gugai,%20Salem-636006,%20Tamil%20Nadu&output=embed"
+            width="100%" 
+            height="250" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+
+</div>
 
             <!-- Contact Form -->
             <div class="lg:col-span-2 bg-gray-50 p-8 rounded-3xl">

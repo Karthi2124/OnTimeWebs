@@ -33,7 +33,5 @@
     @include('partials.what-we-do')
     @include('partials.pricing')
     @include('partials.contact')
-    @include('partials.google-map')
-    @include('partials.address')
 
 @endsection
