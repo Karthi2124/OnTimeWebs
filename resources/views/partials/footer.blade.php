@@ -8,20 +8,24 @@
             <!-- Company Info -->
             <div>
                 <div class="flex items-center space-x-2 mb-6">
-                    <a href="{{ url('/') }}" class="flex items-center">
-    
-    <img src="{{ asset('images/logo-4.png') }}" 
-         alt="OnTimeWebs Logo"
-         class="h-18 md:h-20 w-auto object-contain">
-                <span class="font-bold text-xl text-gray-800"><span class="text-indigo-600">OnTimeWebs</span></span>
-            </a>
+                    <a href="{{ url('/') }}" class="flex items-center space-x-2">
 
+                        <!-- Hide logo on mobile -->
+                        <img src="{{ asset('images/logo-4.png') }}" 
+                             alt="OnTimeWebs Logo"
+                             class="hidden md:block h-16 md:h-20 w-auto object-contain">
+
+                        <!-- Brand Name -->
+                        <span class="font-bold text-xl">
+                            <span class="text-indigo-600">OnTimeWebs</span>
+                        </span>
+
+                    </a>
                 </div>
                 
                 <p class="text-gray-400 mb-6">
                     Empowering Indian startups and small businesses with professional, affordable websites.
                 </p>
-                
             </div>
             
             <!-- Quick Links -->
@@ -51,23 +55,18 @@
             <!-- Newsletter -->
             <div>
                 <h4 class="text-lg font-semibold mb-6">Stay Updated</h4>
-                <p class="text-gray-400 mb-4">Subscribe to get the latest updates and offers.</p>
+                <p class="text-gray-400 mb-4">
+                    Subscribe to get the latest updates and offers.
+                </p>
                 
-                <form class="space-y-3">
-                    <input type="email" placeholder="Your Email" 
-                           class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl focus:outline-none focus:border-indigo-600 text-white">
-                    <button type="submit" 
-                            class="w-full gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition">
-                        Subscribe
-                        <i class="fas fa-paper-plane ml-2"></i>
-                    </button>
-                </form>
             </div>
+
         </div>
         
         <!-- Bottom Bar -->
         <div class="pt-8 border-t border-gray-800 text-center text-gray-400">
             <p>&copy; 2026 OnTimeWebs. All rights reserved.</p>
         </div>
+
     </div>
 </footer>
